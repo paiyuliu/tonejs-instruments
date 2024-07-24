@@ -1,0 +1,28 @@
+[
+    {"lyric":"", "note":"A3", "duration":1},
+    {"lyric":"", "note":"E4", "duration":1.5},
+    {"lyric":"", "note":"E4", "duration":0.5},
+    {"lyric":"", "note":"A4", "duration":1},
+    {"lyric":"", "note":null, "duration":0.25},
+    {"lyric":"", "note":"B4", "duration":0.25},
+    {"lyric":"", "note":"B4", "duration":0.25},
+    {"lyric":"", "note":"C5", "duration":0.25},
+    {"lyric":"", "note":"B4", "duration":1.5},
+    {"lyric":"", "note":"B4", "duration":0.75},
+    {"lyric":"", "note":"G4", "duration":0.25},
+    {"lyric":"", "note":"G4", "duration":1.25},
+    {"lyric":"", "note":null, "duration":0.5},
+    {"lyric":"", "note":"F4", "duration":0.25},
+    {"lyric":"", "note":"E4", "duration":0.25},
+    {"lyric":"", "note":"F4", "duration":1.75},
+    {"lyric":"", "note":"F4", "duration":0.75},
+    {"lyric":"", "note":"G4", "duration":0.75},
+    {"lyric":"", "note":"F4", "duration":0.75},
+    
+    {"lyric":"", "note":"E4", "duration":0.25},
+    {"lyric":"", "note":"D4", "duration":0.25},
+    {"lyric":"", "note":"E4", "duration":2},
+    {"lyric":"", "note":null, "duration":2},
+
+    {"lyric":"", "note":null, "duration":1}
+]

@@ -1,0 +1,37 @@
+[
+    {"lyric":null,"note":null,"duration":"1m"}
+   ,{"lyric":"櫻","note":"E4","duration":"2n","chords":{"note":["C4","G4","F4"],"duration":"4n"}}
+   ,{"lyric":"花","note":"E4","duration":"4n"}
+   ,{"lyric":"開","note":"F4","duration":"4n","chords":{"note":["C4","G4","F4"],"duration":"4n"}}
+   ,{"lyric":"在","note":"E4","duration":"4n"}
+   ,{"lyric":"燦","note":"D4","duration":"4n","chords":{"note":["D4","G4","C4","E4"],"duration":"4n"}}
+   ,{"lyric":"爛","note":"C4","duration":"4n"}
+
+   ,{"lyric":"的","note":"D4","duration":"4n","chords":{"note":["D4","G4","C4","E4"],"duration":"4n"}}
+   ,{"lyric":"季","note":"G4","duration":"8n"}
+   ,{"lyric":"節","note":"C4","duration":"2n+8n"}
+   ,{"lyric":null,"note":null,"duration":"1m"}
+   
+   ,{"lyric":"繽","note":"C4","duration":"4n"}
+   ,{"lyric":"紛","note":"A4","duration":"2n"}
+   ,{"lyric":"落","note":"G4","duration":"4n"}
+   ,{"lyric":"在","note":"D4","duration":"4n"}
+   ,{"lyric":"你","note":"E4","duration":"4n","chords":{"note":["D4","A4","D4","G3"],"duration":"4n"}}
+   ,{"lyric":"窗","note":"F4","duration":"4n"}
+   ,{"lyric":"前","note":"E4","duration":"4n+8n","chords":{"note":["D4","A4","D4","G3"],"duration":"4n"}}
+   ,{"lyric":null,"note":null,"duration":"2n"}
+   ,{"lyric":"朵","note":"C4","duration":"8n","chords":{"note":["D4","G4","C4","E4"],"duration":"4n"}}
+   ,{"lyric":"朵","note":"A4","duration":"4n"}
+   ,{"lyric":"代","note":"G4","duration":"8n","chords":{"note":["D4","C4","F4","G3"],"duration":"4n"}}
+   ,{"lyric":"表","note":"F4","duration":"8n"}
+   ,{"lyric":"我","note":"E4","duration":"8n","chords":{"note":["D4","G4","C4","E4"],"duration":"4n"}}
+   ,{"lyric":"的","note":"D4","duration":"8n"}
+   
+   
+   
+
+   ,{"lyric":"思","note":"E4","duration":"8n"}
+   ,{"lyric":"","note":"G4","duration":"8n"}
+   ,{"lyric":"念","note":"C4","duration":"2n+8n"}
+   
+]
