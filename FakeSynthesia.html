@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/15.1.2/Tone.js"
+        integrity="sha512-VbxZhFFmDVpPg5CAmDiLkhTizVdeYBstbyXcF5l4Xmweku4+r8Ao9nsbFwHXf9MO298TeMdq5Uj6vwKM9FEPbA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/tonal/browser/tonal.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/bootstrap.superhero.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        console.log(Tonal.Key.minorKey("Ab"));
+    </script>
+
+
+
+    <title>javascript piano synthesia</title>
+    <style>
+        .piano {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            height: 100px;
+            background-color: #333;
+            padding: 10px;
+        }
+
+        .syhthesia {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            /*height: 100px;*/
+            background-color: #333;
+            padding: 10px;
+            padding-top: 0%;
+            padding-bottom: 0%;
+        }
+
+        .whitenote {
+            width: 50px;
+            height: 100px;
+            background-color: #fff;
+            border: 1px solid #000;
+            text-align: center;
+            line-height: 100px;
+            cursor: pointer;
+        }
+
+        .blacknote {
+            width: 30px;
+            height: 60px;
+            background-color: black;
+            border: 1px solid #000;
+            text-align: center;
+            line-height: 60px;
+            cursor: pointer;
+            margin: 0 -15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .activated {
+            background-color: wheat;
+            color: red;
+
+        }
+
+
+        /* vertical bar */
+        .progress.--vr {
+            position: relative;
+            background-color: #333;
+            /*width: 25px;*/
+            height: 50px;
+            /*float: left;*/
+            /*margin-right: 5px;*/
+        }
+
+        .progress.--vr .progress-bar {
+            width: 100%;
+            top: 0;
+            bottom: auto;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>仿 synthesia</h1>
+    
+    <div><br /></div>
+
+    <div class="container-fluid">
+        <button class="btn btn-primary" onclick="testToneJs()">testToneJs</button>
+        <button class="btn btn-primary" onclick="LoadNote()">Load Notes</button>
+        <button class="btn btn-primary" onclick="Tone.Transport.start()">Start</button>
+        <div id="lyric"></div>
+    </div>
+
+    
+
+    <div class="container-fluid">
+        <div class="piano">
+            <div id="C3" class="whitenote">C3</div>
+            <div id="C#3" class="blacknote">C#3</div>
+            <div id="D3" class="whitenote">D3</div>
+            <div id="D#3" class="blacknote">D#3</div>
+            <div id="E3" class="whitenote">E3</div>
+            <div id="F3" class="whitenote">F3</div>
+            <div id="F#3" class="blacknote">F#3</div>
+            <div id="G3" class="whitenote">G3</div>
+            <div id="G#3" class="blacknote">G#3</div>
+            <div id="A3" class="whitenote">A3</div>
+            <div id="A#3" class="blacknote">A#3</div>
+            <div id="B3" class="whitenote">B3</div>
+            <div id="C4" class="whitenote">C4</div>
+            <div id="C#4" class="blacknote">C#4</div>
+            <div id="D4" class="whitenote">D4</div>
+            <div id="D#4" class="blacknote">D#4</div>
+            <div id="E4" class="whitenote">E4</div>
+            <div id="F4" class="whitenote">F4</div>
+            <div id="F#4" class="blacknote">F#4</div>
+            <div id="G4" class="whitenote">G4</div>
+            <div id="G#4" class="blacknote">G#4</div>
+            <div id="A4" class="whitenote">A4</div>
+            <div id="A#4" class="blacknote">A#4</div>
+            <div id="B4" class="whitenote">B4</div>
+            <div id="C5" class="whitenote">C5</div>
+            <div id="C#5" class="blacknote">C#5</div>
+            <div id="D5" class="whitenote">D5</div>
+            <div id="D#5" class="blacknote">D#5</div>
+            <div id="E5" class="whitenote">E5</div>
+            <div id="F5" class="whitenote">F5</div>
+            <div id="F#5" class="blacknote">F#5</div>
+            <div id="G5" class="whitenote">G5</div>
+            <div id="G#5" class="blacknote">G#5</div>
+            <div id="A5" class="whitenote">A5</div>
+            <div id="A#5" class="blacknote">A#5</div>
+            <div id="B5" class="whitenote">B5</div>
+            <div id="C6" class="whitenote">C6</div>
+        </div>
+    </div>
+
+    
+    <hr />
+    <div id="synthesiaContainer" class="container-fluid">
+        
+        <div class="syhthesia d-none">
+            <div class="whitenote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">C3</div>
+            </div>
+            <div class="blacknote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">Cs3</div>
+            </div>
+            <div class="whitenote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">D3</div>
+            </div>
+            <div class="blacknote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">Ds3</div>
+            </div>
+            <div class="whitenote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">E3</div>
+            </div>
+            <div class="whitenote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">F3</div>
+            </div>
+            <div class="blacknote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">Fs3</div>
+            </div>
+            <div class="whitenote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">G3</div>
+            </div>
+            <div class="blacknote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">Gs3</div>
+            </div>
+            <div class="whitenote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">A3</div>
+            </div>
+            <div class="blacknote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">As3</div>
+            </div>
+            <div class="whitenote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">B3</div>
+            </div>
+            <div class="whitenote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">C4</div>
+            </div>
+            <div class="blacknote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">Cs4</div>
+            </div>
+            <div class="whitenote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">D4</div>
+            </div>
+            <div class="blacknote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">Ds4</div>
+            </div>
+            <div class="whitenote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">E4</div>
+            </div>
+            <div class="whitenote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">F4</div>
+            </div>
+            <div class="blacknote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">Fs4</div>
+            </div>
+            <div class="whitenote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">G4</div>
+            </div>
+            <div class="blacknote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">Gs4</div>
+            </div>
+            <div class="whitenote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">A4</div>
+            </div>
+            <div class="blacknote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">As4</div>
+            </div>
+            <div class="whitenote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">B4</div>
+            </div>
+            <div class="whitenote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">C5</div>
+            </div>
+            <div class="blacknote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">Cs5</div>
+            </div>
+            <div class="whitenote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">D5</div>
+            </div>
+            <div class="blacknote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">Ds5</div>
+            </div>
+            <div class="whitenote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">E5</div>
+            </div>
+            <div class="whitenote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">F5</div>
+            </div>
+            <div class="blacknote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">Fs5</div>
+            </div>
+            <div class="whitenote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">G5</div>
+            </div>
+            <div class="blacknote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">Gs5</div>
+            </div>
+            <div class="whitenote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">A5</div>
+            </div>
+            <div class="blacknote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">As5</div>
+            </div>
+            <div class="whitenote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">B5</div>
+            </div>
+            <div class="whitenote progress --vr">
+                <div class="progress-bar bg-dark" role="progressbar" style="height: 100%;">C6</div>
+            </div>
+        </div>
+
+    </div>
+    
+
+    
+
+
+
+
+    <script>
+
+
+        //create a synth and connect it to the master output (your speakers)
+        const synthA = new Tone.FMSynth().toDestination();
+        // config synthA volume
+        synthA.volume.value = -20;
+        synthA.mute = true;
+        const synthB = new Tone.AMSynth().toDestination();
+
+        const piano = new Tone.Sampler({
+            urls: {
+                "C4": "C4.mp3",
+                "D#4": "Ds4.mp3",
+                "F#4": "Fs4.mp3",
+                "A4": "A4.mp3",
+            },
+            release: 1,
+            baseUrl: "./samples/piano/",
+        }).toDestination();
+
+        const saxophone = new Tone.Sampler({
+            urls: {
+                "C4": "C4.mp3",
+                "D#4": "Ds4.mp3",
+                "F#4": "Fs4.mp3",
+                "A4": "A4.mp3",
+            },
+            release: 1,
+            baseUrl: "./samples/saxophone/",
+        }).toDestination();
+
+        const guitar = new Tone.Sampler({
+            urls: {
+                "C4": "C4.mp3",
+                "D#4": "Ds4.mp3",
+                "F#4": "Fs4.mp3",
+                "A4": "A4.mp3",
+            },
+            release: 1,
+            baseUrl: "./samples/guitar-acoustic/",
+        }).toDestination();
+
+        const cello = new Tone.Sampler({
+            urls: {
+                "C4": "C4.mp3",
+                "D#4": "Ds4.mp3",
+                "F#4": "Fs4.mp3",
+                "A4": "A4.mp3",
+            },
+            release: 1,
+            baseUrl: "./samples/cello/",
+        }).toDestination();
+
+        const harmonium = new Tone.Sampler({
+            urls: {
+                "C3": "C3.mp3",
+                "D#3": "Ds3.mp3",
+                "F#3": "Fs3.mp3",
+                "A3": "A3.mp3",
+            },
+            release: 1,
+            baseUrl: "./samples/harmonium/",
+        }).toDestination();
+
+        function testToneJs() {
+            synth.triggerAttackRelease("C4", "8n");
+            piano.triggerAttackRelease("C4", "8n");
+        }
+
+        async function LoadNote() {
+            var synth = new Tone.Synth().toDestination();
+            // set sequence bpm
+            Tone.Transport.bpm.value = 60;
+            // 抓取1拍的秒數 
+            var beatDuration = 60 / Tone.Transport.bpm.value;
+
+            let notes2 = [];
+            await fetch("SakuraSnow2.json")
+                .then(response => response.json())
+                .then(data => {
+                    //console.log(data);
+                    notes2 = data;
+                    let beats = 0;
+                    let accuDuration = 0;
+
+                    let syhtesiaArray = []
+                    //foreach syhtesiaArray to generate syhthesia progress bar
+                    data.forEach(function (note) {
+                        let synthesiaElement = generateWholeSynthesiaElement();
+                        syhtesiaArray.push(synthesiaElement);
+                        // find syhthesia progress bar name equal to note.note
+                        let progress = synthesiaElement.querySelector(`[name="${note.note}"]`);
+                        if(progress){
+                            progress.style.height = (note.duration/4) * 100 + '%';
+                            progress.style.backgroundColor = 'red'; 
+                        }
+                        
+                    });
+
+
+
+                    let noteCnt = 0;
+                    var sequence = new Tone.Sequence((time, note) => {
+                        
+                        
+                        
+
+                        if (note.lyric) {
+                            document.getElementById("lyric").innerHTML = note.lyric;
+                        }
+
+                        setTimeout(() => {
+                            synthB.triggerAttackRelease("D4", 1 * beatDuration, time);
+                        }, 2 * beatDuration * 1000);
+
+
+                        if (note.note) {
+
+                            let activateKey = document.getElementById(note.note);
+                            activateKey.classList.add('activated');
+                            piano.triggerAttackRelease(note.note, note.duration * beatDuration, time);
+                            // note.note 降八度
+                            //harmonium.triggerAttackRelease(note.note.replace('4','3'), note.duration*beatDuration, time);
+                            accuDuration += note.duration;
+
+                            //guitar.triggerAttackRelease(note.note, note.duration*beatDuration, time);
+
+                            // accordint to note.note using tonal.js to get the note's chords
+                            let chords = Tonal.Chord.notes(note.note);
+
+                            for (var j = 0; j < chords.length; j++) {
+                                // if the chord lenght equal 1 then to append '4' to the end
+                                if (chords[j].length == 1) {
+                                    let guitarChords = chords[j] + '4';
+                                    chords[j] = chords[j] + '3';
+
+
+                                    let activateKey = document.getElementById(chords[j]);
+                                    activateKey.classList.add('activated');
+                                    //harmonium.triggerAttackRelease(chords[j], note.duration * beatDuration, time);
+                                    //guitar.triggerAttackRelease(guitarChords, note.duration * beatDuration, time);
+                                    setTimeout(() => {
+                                        activateKey.classList.remove('activated');
+                                    }, note.duration * beatDuration * 1000);
+                                }
+                            }
+                            //console.log(chords);
+
+                            setTimeout(() => {
+                                activateKey.classList.remove('activated');
+                            }, note.duration * beatDuration * 1000);
+
+                        } else {
+                            synthA.triggerAttackRelease(null, note.duration * beatDuration, time);
+                        }
+
+                        if (note.chords && note.chords.note && note.chords.duration) {
+                            for (var j = 0; j < note.chords.note.length; j++) {
+                                //let activateKey = document.getElementById(note.chords.note[j]);
+                                //activateKey.classList.add('activated');
+                                //piano.triggerAttackRelease(note.chords.note[j], note.chords.duration*beatDuration, time);
+                                //setTimeout(() => {
+                                //    activateKey.classList.remove('activated');
+                                //}, note.chords.duration*beatDuration*1000);
+                            }
+                        }
+
+                        // when the last note then stop
+                        beats++;
+                        if (beats == notes2.length - 1) {
+                            Tone.Transport.stop();
+                            beats = 0;
+                        }
+                        // remove syhtesiaArray[noteCnt] syhthesia
+                        let removeElement = syhtesiaArray[noteCnt];
+                        removeElement.remove();
+
+                        noteCnt++;
+
+
+                    }, notes2);
+                    sequence.loop = false;
+                    sequence.start(0);
+                   // Tone.Transport.start();
+                });
+
+        }
+
+        function generateSynthesia(notes) {
+            let synthesiaArea = document.querySelector('.synthesiaArea');
+            let synthesia = document.createElement('div');
+            synthesia.classList.add('synthesia');
+            notes.forEach(function (note) {
+                let noteDiv = document.createElement('div');
+                noteDiv.classList.add('note');
+                noteDiv.innerHTML = note.note;
+                synthesia.appendChild(noteDiv);
+            });
+            synthesiaArea.appendChild(synthesia);
+        }
+
+
+        function playMusic(key) {
+            //console.log(key.id);
+            piano.triggerAttack(key.id);
+            document.getElementById(key.id).classList.add('activated');
+
+            // 如果還沒註冊mouseup事件，就註冊
+            if (!key.onmouseup) {
+                key.addEventListener('mouseup', function () {
+                    piano.triggerRelease();
+                    document.getElementById(key.id).classList.remove('activated');
+                });
+            }
+        }
+
+        function mouseDownAll() {
+            var notes = document.querySelectorAll('.whitenote, .blacknote');
+            notes.forEach(function (note) {
+                note.addEventListener('mousedown', function () {
+                    playMusic(note);
+                });
+            });
+        }
+
+        mouseDownAll();
+
+        function generateWholeSynthesiaElement(){
+            let synthesiaContainer = document.getElementById('synthesiaContainer');
+            let synthesia = document.createElement('div');
+            synthesia.classList.add('syhthesia');
+            let notes = ['C3', 'Cs3', 'D3', 'Ds3', 'E3', 'F3', 'Fs3', 'G3', 'Gs3', 'A3', 'As3', 'B3', 'C4', 'Cs4', 'D4', 'Ds4', 'E4', 'F4', 'Fs4', 'G4', 'Gs4', 'A4', 'As4', 'B4', 'C5', 'Cs5', 'D5', 'Ds5', 'E5', 'F5', 'Fs5', 'G5', 'Gs5', 'A5', 'As5', 'B5', 'C6'];
+            notes.forEach(function(note){
+                let noteDiv = document.createElement('div');
+                
+                if(note.includes('s')){
+                    noteDiv.classList.add('blacknote', 'progress', '--vr');
+                }else{
+                    noteDiv.classList.add('whitenote', 'progress', '--vr');
+                }
+
+                let progress = document.createElement('div');
+                progress.classList.add('progress-bar', 'bg-dark');
+                progress.setAttribute('role', 'progressbar');
+                progress.setAttribute('name', note);
+                progress.style.height = '0%';
+                progress.innerHTML = note;
+                noteDiv.appendChild(progress);
+                synthesia.appendChild(noteDiv);
+            });
+            synthesiaContainer.appendChild(synthesia);
+            return synthesia;
+        }
+
+
+    </script>
+
+</body>
+
+</html>
