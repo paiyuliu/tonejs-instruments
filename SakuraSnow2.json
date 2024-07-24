@@ -1,0 +1,67 @@
+[
+    {"lyric":" ","note":null,"duration":4}
+    ,{"lyric":" ","note":null,"duration":4}
+    ,{"lyric":" ","note":null,"duration":4}
+    ,{"lyric":" ","note":null,"duration":4}
+   ,{"lyric":"櫻","note":"E4","duration":1,"chords":{"note":["E3","E5"],"duration":2}}
+   ,{"lyric":"花","note":"E4","duration":0.5}
+   ,{"lyric":"開","note":"F4","duration":0.5,"chords":{"note":["F3","F5"],"duration":2}}
+   ,{"lyric":"在","note":"E4","duration":0.5}
+   ,{"lyric":"燦","note":"D4","duration":0.5,"chords":{"note":["D3","D5"],"duration":2}}
+   ,{"lyric":"爛","note":"C4","duration":0.5}
+
+   ,{"lyric":"的","note":"D4","duration":1,"chords":{"note":["C#3","D5"],"duration":2}}
+   ,{"lyric":"季","note":"G4","duration":0.5}
+   ,{"lyric":"節","note":"C4","duration":1.5,"chords":{"note":["C3","C5"],"duration":2}}
+   ,{"lyric":" ","note":null,"duration":2}
+
+   ,{"lyric":"繽","note":"C4","duration":0.8,"chords":{"note":["C3","C5"],"duration":2}}
+   ,{"lyric":"紛","note":"A4","duration":1}
+   ,{"lyric":"落","note":"G4","duration":0.5}
+   ,{"lyric":"在","note":"D4","duration":0.5,"chords":{"note":["D3","D5"],"duration":2}}
+   ,{"lyric":"你","note":"E4","duration":0.5}
+   ,{"lyric":"窗","note":"F4","duration":0.5,"chords":{"note":["F3","F5"],"duration":2}}
+   ,{"lyric":"前","note":"E4","duration":1.5}
+   ,{"lyric":" ","note":null,"duration":2}
+
+   ,{"lyric":"朵","note":"C4","duration":0.5,"chords":{"note":["C3","C5"],"duration":2}}
+   ,{"lyric":"朵","note":"A4","duration":1.5}
+   ,{"lyric":"代","note":"G4","duration":0.5,"chords":{"note":["G3","G5"],"duration":2}}
+   ,{"lyric":"表","note":"F4","duration":0.5}
+   ,{"lyric":"我","note":"E4","duration":0.5,"chords":{"note":["E3","E5"],"duration":2}}
+   ,{"lyric":"的","note":"D4","duration":0.5}
+   ,{"lyric":"思","note":"E4","duration":0.5,"chords":{"note":["E3","E5"],"duration":2}}
+   ,{"lyric":"","note":"G4","duration":0.5}
+   ,{"lyric":"念","note":"C4","duration":2.5}
+   ,{"lyric":" ","note":null,"duration":2}
+
+   ,{"lyric":" ","note":"B3","duration":0.5}
+   ,{"lyric":" ","note":"F4","duration":1}
+   ,{"lyric":" ","note":"G4","duration":0.5}
+   ,{"lyric":" ","note":"D4","duration":1.5}
+   ,{"lyric":" ","note":null,"duration":2}
+
+   ,{"lyric":" ","note":"E4","duration":1.5}
+   ,{"lyric":" ","note":"E4","duration":0.5}
+   ,{"lyric":" ","note":"F4","duration":0.5}
+   ,{"lyric":" ","note":"E4","duration":1}
+   ,{"lyric":" ","note":"D4","duration":0.5}
+   ,{"lyric":" ","note":"G4","duration":0.5}
+   ,{"lyric":" ","note":"C4","duration":1}
+   ,{"lyric":" ","note":null,"duration":2}
+
+    ,{"lyric":" ","note":"D4","duration":0.5}
+    ,{"lyric":" ","note":"A4","duration":1}
+    ,{"lyric":" ","note":"G4","duration":0.5}
+    ,{"lyric":" ","note":"D4","duration":0.5}
+    ,{"lyric":" ","note":"E4","duration":0.5}
+    ,{"lyric":" ","note":"F4","duration":0.5}
+    ,{"lyric":" ","note":"E4","duration":1}
+    ,{"lyric":" ","note":null,"duration":4}
+    ,{"lyric":" ","note":null,"duration":4}
+   
+   
+
+
+   
+]
