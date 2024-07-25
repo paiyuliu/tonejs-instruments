@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/15.1.2/Tone.js"
+        integrity="sha512-VbxZhFFmDVpPg5CAmDiLkhTizVdeYBstbyXcF5l4Xmweku4+r8Ao9nsbFwHXf9MO298TeMdq5Uj6vwKM9FEPbA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/tonal/browser/tonal.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/bootstrap.superhero.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        console.log(Tonal.Key.minorKey("Ab"));
+    </script>
+    <title>Play A song</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <p>Hello</p>
+        <button class="btn btn-primary" onclick="LoadNotes()">Load Notes</button>
+
+    </div>
+
+
+
+
+
+
+
+    <script>
+
+        const piano = new Tone.Sampler({
+            urls: {
+                "C4": "C4.mp3",
+                "D#4": "Ds4.mp3",
+                "F#4": "Fs4.mp3",
+                "A4": "A4.mp3",
+            },
+            release: 1,
+            baseUrl: "./samples/piano/",
+        }).toDestination();
+
+        const guitar = new Tone.Sampler({
+            urls: {
+                "C4": "C4.mp3",
+                "D#4": "Ds4.mp3",
+                "F#4": "Fs4.mp3",
+                "A4": "A4.mp3",
+            },
+            release: 1,
+            baseUrl: "./samples/guitar-acoustic/",
+        }).toDestination();
+
+        const cello = new Tone.Sampler({
+            urls: {
+                "C4": "C4.mp3",
+                "D#4": "Ds4.mp3",
+                "F#4": "Fs4.mp3",
+                "A4": "A4.mp3",
+            },
+            release: 1,
+            baseUrl: "./samples/cello/",
+        }).toDestination();
+
+        const organ = new Tone.Sampler({
+            urls: {
+                "C4": "C4.mp3",
+                "D#4": "Ds4.mp3",
+                "F#4": "Fs4.mp3",
+                "A4": "A4.mp3",
+            },
+            release: 1,
+            baseUrl: "./samples/organ/",
+        }).toDestination();
+
+
+
+
+        var PlaySong=function(musicJson){
+            var synth = new Tone.Synth().toDestination();
+
+            
+            var now = Tone.now();
+            var duration = 1;
+            // set tone bpm
+            Tone.Transport.bpm.value = 120;
+            var beatDuration = 60 / Tone.Transport.bpm.value;
+            console.log(musicJson);
+            let accDuration = 0;
+            musicJson.forEach(function(note){
+                console.log(note);
+                
+                if(note.noteName){
+                    cello.triggerAttackRelease(note.noteName, note.duration*beatDuration, now+accDuration);
+                    organ.triggerAttackRelease(note.noteName, note.duration*beatDuration, now+accDuration);
+                    //piano.triggerAttackRelease("C4", 1, now+accDuration);
+                    // 利用tonal.js將和弦列出來
+                    let chord = Tonal.Chord.notes(note.noteName);
+
+                    if(note.autoChord ){
+                        var chordCnt = 0;
+                        chord.forEach(function(chordNote){
+                            // 和弦都1拍就好
+                            piano.triggerAttackRelease(chordNote+"4", 1*beatDuration, now+accDuration+(chordCnt*beatDuration));
+                            guitar.triggerAttackRelease(chordNote+"4", 1*beatDuration, now+accDuration+(chordCnt*beatDuration));
+
+                            //piano.triggerAttackRelease(chordNote+"3", note.duration*beatDuration, now+accDuration);
+                            chordCnt++;
+                        });
+
+                    }
+                }else{
+                    synth.triggerAttackRelease(null, note.duration*beatDuration, now+accDuration);
+                }
+                accDuration = accDuration + (note.duration*beatDuration);
+                
+            });
+
+        };
+
+
+        var LoadNotes = function () {
+            // fetch LittleStar.json
+            fetch('LittleStar.json')
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(function (note) {
+                        note.noteName = ConvertMajor("C",note.note);
+                    });
+
+                    
+                    PlaySong(data);
+
+
+
+
+                    // play the song
+                    //PlaySong(data);
+                });
+        };
+
+        var ConvertMajor=function(major,numberNote){
+            var Cmajor = [null,'C4','D4','E4','F4','G4','A4','B4','C5'];
+            var Ebmajor = [null,'Eb4','F4','G4','Ab4','Bb4','C5','D5','Eb5'];
+            var Gmajor = [null,'G4','A4','B4','C5','D5','E5','F#5','G5'];
+
+            if(major=='C'){
+                return Cmajor[numberNote];
+            }else if(major=='Eb'){
+                return Ebmajor[numberNote];
+            }else if(major=='G'){
+                return Gmajor[numberNote];
+            }
+
+
+        }
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
