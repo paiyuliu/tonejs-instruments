@@ -23,7 +23,7 @@
 
     <div class="container">
         <p>Hello</p>
-        <button class="btn btn-primary" onclick="LoadNotes()">Load Notes</button>
+        <button class="btn btn-primary" onclick="LoadNotes()">Load Notes And Play</button>
 
     </div>
 
@@ -97,31 +97,34 @@
                 console.log(note);
                 
                 if(note.noteName){
-                    cello.triggerAttackRelease(note.noteName, note.duration*beatDuration, now+accDuration);
+                    // 主弦律play
                     organ.triggerAttackRelease(note.noteName, note.duration*beatDuration, now+accDuration);
+                    //piano.triggerAttackRelease(note.noteName, note.duration*beatDuration, now+accDuration);
                     //piano.triggerAttackRelease("C4", 1, now+accDuration);
+                    
+                    
                     // 利用tonal.js將和弦列出來
                     let chord = Tonal.Chord.notes(note.noteName);
-
                     if(note.autoChord ){
                         var chordCnt = 0;
+                        
                         chord.forEach(function(chordNote){
-                            // 和弦都1拍就好
-                            piano.triggerAttackRelease(chordNote+"4", 1*beatDuration, now+accDuration+(chordCnt*beatDuration));
-                            guitar.triggerAttackRelease(chordNote+"4", 1*beatDuration, now+accDuration+(chordCnt*beatDuration));
+                            if(chordCnt<2){
+                                // 分散和弦 和弦都1拍就好
+                                //organ.triggerAttackRelease(chordNote+"3", 1*beatDuration, now+accDuration+(chordCnt*beatDuration));
+                                //piano.triggerAttackRelease(chordNote+"3", 1*beatDuration, now+accDuration+(chordCnt*beatDuration));
 
-                            //piano.triggerAttackRelease(chordNote+"3", note.duration*beatDuration, now+accDuration);
+                                // 一起彈的和弦
+                                guitar.triggerAttackRelease(chordNote+"4", note.duration*beatDuration, now+accDuration);
+                            }
                             chordCnt++;
                         });
-
                     }
                 }else{
                     synth.triggerAttackRelease(null, note.duration*beatDuration, now+accDuration);
                 }
                 accDuration = accDuration + (note.duration*beatDuration);
-                
             });
-
         };
 
 
